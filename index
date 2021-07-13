@@ -1,0 +1,33 @@
+function solution(player, dice) {
+  let obj = {};
+  for (let i = 1; i <= player; i++) {
+    obj[i] = 0;
+  }
+  let i = 1;
+  let diceCounter = dice;
+  while (i <= player) {
+    if (diceCounter > 0) {
+      for (let j = 1; j <= dice; j++) {
+        const randomDice = Math.ceil(Math.random() * 6);
+        if (randomDice === 1) {
+          diceCounter--;
+        } else if (randomDice === 6) {
+          obj[i] += 1;
+          diceCounter--;
+        }
+      }
+    } else {
+      i++;
+      diceCounter += dice;
+    }
+  }
+  let maxValue = 0;
+  for (const [key, value] of Object.entries(obj)) {
+    if (value > maxValue) {
+      maxValue = key;
+    }
+  }
+  return maxValue;
+}
+
+solution(3, 4);
